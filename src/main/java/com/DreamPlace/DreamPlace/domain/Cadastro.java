@@ -1,13 +1,12 @@
 package com.DreamPlace.DreamPlace.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -32,8 +31,10 @@ public class Cadastro implements Serializable {
     @Length(min = 11, max = 11, message = "Digite um NÚMERO válido.")
     private String numero;
 
+    @OneToMany(mappedBy = "cadastro")
+    private List<Reserva> reservas = new ArrayList<>();
 
-    //lista de reservas
+
 
     public Cadastro() {
     }
@@ -93,6 +94,14 @@ public class Cadastro implements Serializable {
 
     public void setNumero(String numero) {
         this.numero = numero;
+    }
+
+    public List<Reserva> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(List<Reserva> reservas) {
+        this.reservas = reservas;
     }
 
     @Override
