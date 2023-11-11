@@ -1,8 +1,10 @@
 package com.DreamPlace.DreamPlace.resources;
 
+import com.DreamPlace.DreamPlace.DTOs.AvaliarDTO;
 import com.DreamPlace.DreamPlace.DTOs.ReservaDTO;
+import com.DreamPlace.DreamPlace.domain.Avaliar;
 import com.DreamPlace.DreamPlace.domain.Reserva;
-import com.DreamPlace.DreamPlace.services.ReservaService;
+import com.DreamPlace.DreamPlace.services.AvaliarService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,47 +17,48 @@ import java.util.stream.Collectors;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/reservas") //value =
-public class ReservaResources {
+@RequestMapping("/avaliar")
+public class AvaliarResources {
 
     @Autowired
-    private ReservaService service;
-
+    private AvaliarService service;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Reserva> findById(@PathVariable Integer id){
-        Reserva obj = service.findById(id);
+    public ResponseEntity<Avaliar> findById(@PathVariable Integer id){
+        Avaliar obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }
 
-    // So vai achar livros pela categoria, omite o autor e texto: localhost:8080/livros?categoria=1
+
     @GetMapping // PRO PADRAO DTO.
-    public ResponseEntity<List<ReservaDTO>> findAll(
+    public ResponseEntity<List<AvaliarDTO>> findAll(
             @RequestParam(value = "cadastro", defaultValue = "0") Integer id_cad){
-        List<Reserva> list = service.findAll(id_cad);
-        List<ReservaDTO> listDTO = list.stream().map(obj -> new ReservaDTO(obj)).collect(Collectors.toList());
+        List<Avaliar> list = service.findAll(id_cad);
+        List<AvaliarDTO> listDTO = list.stream().map(obj -> new AvaliarDTO(obj)).collect(Collectors.toList());
         return ResponseEntity.ok().body(listDTO);
     }
 
+
     @PutMapping("/{id}")
-    public ResponseEntity<Reserva> update(@PathVariable Integer id, @Valid @RequestBody Reserva obj){
-        Reserva newObj = service.update(id, obj);
+    public ResponseEntity<Avaliar> update(@PathVariable Integer id, @Valid @RequestBody Avaliar obj){
+        Avaliar newObj = service.update(id, obj);
         return ResponseEntity.ok().body(newObj);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Reserva> updatePatch(@PathVariable Integer id, @Valid @RequestBody Reserva obj){
-        Reserva newObj = service.update(id, obj);
+    public ResponseEntity<Avaliar> updatePatch(@PathVariable Integer id, @Valid @RequestBody Avaliar obj){
+        Avaliar newObj = service.update(id, obj);
         return ResponseEntity.ok().body(newObj);
     }
 
+    // localhost:8080/avaliar?cadastro=id
     @PostMapping
-    public ResponseEntity<Reserva> create(
-            @RequestParam(value = "cadastro", defaultValue = "0") Integer id_cad, @Valid @RequestBody Reserva obj){
-        Reserva newObj = service.create(id_cad, obj);
+    public ResponseEntity<Avaliar> create(
+            @RequestParam(value = "cadastro", defaultValue = "0") Integer id_cad, @Valid @RequestBody Avaliar obj){
+        Avaliar newObj = service.create(id_cad, obj);
 
         URI uri = ServletUriComponentsBuilder
-                .fromCurrentContextPath().path("/reservas/{id}")
+                .fromCurrentContextPath().path("/avaliar/{id}")
                 .buildAndExpand(newObj.getId())
                 .toUri();
 

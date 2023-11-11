@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/cadastro")
+@RequestMapping("/cadastros")
 public class CadastroResources {
 
     @Autowired

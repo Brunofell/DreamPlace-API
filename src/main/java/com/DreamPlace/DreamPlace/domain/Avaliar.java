@@ -1,17 +1,15 @@
 package com.DreamPlace.DreamPlace.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Cadastro implements Serializable {
-
+public class Avaliar implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -21,34 +19,26 @@ public class Cadastro implements Serializable {
     @NotEmpty(message= "Campo EMAIL requerido!")
     @Length(min = 3, max = 100, message = "O campo EMAIL deve ter entre 3 e 100 caracteres.")
     private String email;
-    @NotEmpty(message= "Campo SENHA requerido!")
-    @Length(min = 3, max = 50, message = "O campo SENHA deve ter entre 3 e 50 caracteres.")
-    private String senha;
-    @NotEmpty(message= "Campo CPF requerido!")
-    @Length(min = 11, max = 11, message = "O campo CPF deve ter 11 caracteres.")
-    private String cpf;
     @NotEmpty(message= "Campo numero requerido!")
     @Length(min = 11, max = 11, message = "Digite um NÚMERO válido.")
     private String numero;
+    private String nota;
 
-    @OneToMany(mappedBy = "cadastro")
-    private List<Reserva> reservas = new ArrayList<>();
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "cadastro_id")
+    private Cadastro cadastro;
 
-    @OneToMany(mappedBy = "cadastro")
-    private List<Reserva> avaliar = new ArrayList<>();
-
-
-
-    public Cadastro() {
+    public Avaliar() {
     }
 
-    public Cadastro(Integer id, String nome, String email, String senha, String cpf, String numero) {
+    public Avaliar(Integer id, String nome, String email, String numero, String nota, Cadastro cadastro) {
         this.id = id;
         this.nome = nome;
         this.email = email;
-        this.senha = senha;
-        this.cpf = cpf;
         this.numero = numero;
+        this.nota = nota;
+        this.cadastro = cadastro;
     }
 
     public Integer getId() {
@@ -75,22 +65,6 @@ public class Cadastro implements Serializable {
         this.email = email;
     }
 
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
     public String getNumero() {
         return numero;
     }
@@ -99,28 +73,28 @@ public class Cadastro implements Serializable {
         this.numero = numero;
     }
 
-    public List<Reserva> getReservas() {
-        return reservas;
+    public String getNota() {
+        return nota;
     }
 
-    public void setReservas(List<Reserva> reservas) {
-        this.reservas = reservas;
+    public void setNota(String nota) {
+        this.nota = nota;
     }
 
-    public List<Reserva> getAvaliar() {
-        return avaliar;
+    public Cadastro getCadastro() {
+        return cadastro;
     }
 
-    public void setAvaliar(List<Reserva> avaliar) {
-        this.avaliar = avaliar;
+    public void setCadastro(Cadastro cadastro) {
+        this.cadastro = cadastro;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Cadastro cadastro = (Cadastro) o;
-        return Objects.equals(id, cadastro.id);
+        Avaliar avaliar = (Avaliar) o;
+        return Objects.equals(id, avaliar.id);
     }
 
     @Override
