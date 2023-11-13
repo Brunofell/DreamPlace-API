@@ -1,6 +1,5 @@
 package com.DreamPlace.DreamPlace.DTOs;
 
-
 import com.DreamPlace.DreamPlace.domain.Reserva;
 
 import java.io.Serializable;
