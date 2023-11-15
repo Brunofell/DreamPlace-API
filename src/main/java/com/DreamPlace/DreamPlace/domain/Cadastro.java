@@ -35,9 +35,12 @@ public class Cadastro implements Serializable {
     private List<Reserva> reservas = new ArrayList<>();
 
     @OneToMany(mappedBy = "cadastro")
-    private List<Reserva> avaliar = new ArrayList<>();
+    private List<Avaliar> avaliar = new ArrayList<>();
 
+    @OneToMany(mappedBy = "cadastro")
+    private List<Ticket> ticket = new ArrayList<>();
 
+    // contrutores e getetrs e setter ja estão implementados
 
     public Cadastro() {
     }
@@ -107,12 +110,20 @@ public class Cadastro implements Serializable {
         this.reservas = reservas;
     }
 
-    public List<Reserva> getAvaliar() {
+    public List<Avaliar> getAvaliar() {
         return avaliar;
     }
 
-    public void setAvaliar(List<Reserva> avaliar) {
+    public void setAvaliar(List<Avaliar> avaliar) {
         this.avaliar = avaliar;
+    }
+
+    public List<Ticket> getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(List<Ticket> ticket) {
+        this.ticket = ticket;
     }
 
     @Override

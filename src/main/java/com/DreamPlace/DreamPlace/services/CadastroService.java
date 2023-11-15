@@ -55,4 +55,9 @@ public class CadastroService {
 
     }
 
+    public Cadastro fazerLogin(String email, String senha) {
+        return repository.findByEmailAndSenha(email, senha);
+    }
+
+
 }

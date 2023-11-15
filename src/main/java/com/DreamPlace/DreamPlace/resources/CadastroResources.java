@@ -5,18 +5,21 @@ import com.DreamPlace.DreamPlace.domain.Cadastro;
 import com.DreamPlace.DreamPlace.services.CadastroService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/cadastros")
 public class CadastroResources {
+
 
     @Autowired
     private CadastroService service;
@@ -53,6 +56,14 @@ public class CadastroResources {
         return ResponseEntity.noContent().build();
     }
 
+    //login
+
+    @PostMapping("/login")
+    public Cadastro fazerLogin(@RequestBody Map<String, String> body) {
+        String email = body.get("email");
+        String senha = body.get("senha");
+        return service.fazerLogin(email, senha);
+    }
 
 
 }
