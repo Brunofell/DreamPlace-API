@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:4200") // vai ter que trocar
 @RestController
 @RequestMapping("/cadastros")
 public class CadastroResources {
@@ -65,5 +65,8 @@ public class CadastroResources {
         return service.fazerLogin(email, senha);
     }
 
-
+    @RequestMapping(value = "/{id}", method = RequestMethod.OPTIONS)
+    public ResponseEntity<?> handleOptions() {
+        return ResponseEntity.ok().build();
+    }
 }

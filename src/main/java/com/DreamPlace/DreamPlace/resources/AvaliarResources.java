@@ -15,7 +15,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:4200") // vai ter que trocar
 @RestController
 @RequestMapping("/avaliar")
 public class AvaliarResources {

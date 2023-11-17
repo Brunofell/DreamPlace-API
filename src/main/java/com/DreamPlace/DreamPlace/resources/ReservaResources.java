@@ -2,18 +2,23 @@ package com.DreamPlace.DreamPlace.resources;
 
 import com.DreamPlace.DreamPlace.DTOs.ReservaDTO;
 import com.DreamPlace.DreamPlace.domain.Reserva;
+import com.DreamPlace.DreamPlace.exceptions.ValidationError;
 import com.DreamPlace.DreamPlace.services.ReservaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:4200") // vai ter que trocar
 @RestController
 @RequestMapping("/reservas") //value =
 public class ReservaResources {
