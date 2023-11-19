@@ -31,15 +31,14 @@ public class Cadastro implements Serializable {
     @Length(min = 11, max = 11, message = "Digite um NÚMERO válido.")
     private String numero;
 
-    @OneToMany(mappedBy = "cadastro")
+    @OneToMany(mappedBy = "cadastro", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reserva> reservas = new ArrayList<>();
 
-    @OneToMany(mappedBy = "cadastro")
+    @OneToMany(mappedBy = "cadastro", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Avaliar> avaliar = new ArrayList<>();
 
-    @OneToMany(mappedBy = "cadastro")
+    @OneToMany(mappedBy = "cadastro", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Ticket> ticket = new ArrayList<>();
-
     // contrutores e getetrs e setter ja estão implementados
 
     public Cadastro() {
