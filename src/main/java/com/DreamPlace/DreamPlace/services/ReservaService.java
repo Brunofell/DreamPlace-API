@@ -38,6 +38,7 @@ public class ReservaService {
 
     private void updateData(Reserva newObj, Reserva obj) {
        newObj.setNome(obj.getNome());
+       newObj.setEmail(obj.getEmail());
        newObj.setNumero(obj.getNumero());
        newObj.setCheckIn(obj.getCheckIn());
        newObj.setCheckOut(obj.getCheckOut());
